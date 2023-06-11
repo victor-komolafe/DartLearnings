@@ -57,9 +57,9 @@ void main(){
   //works based on if, else if and then else is executed if condition is met
   String ? name ; //? used to intialize var to null
   String nameToPrint = name ?? "Guest user";  //where ?? is used is value is null
-  print(nameToPrint);
+  print(nameToPrint);  
 
-  // //LOOP CONTROL  
+  //LOOP CONTROL  
   // for(var i = 0; i<4; i++){
   //   print(i);
   // }
