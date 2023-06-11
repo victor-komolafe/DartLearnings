@@ -78,11 +78,18 @@ void main(){
   // }
   // }
   //FOR in loop
-  var planetList = {"Mecury", "Venus", "EArth", "Mars"};  //list of planets
+  var planetList = {"Mecury", "Venus", "EArth", "Mars"}; 
+  //set - use curly brackets and is used for storing unique elements. no two replicates possible
+   //Set of planets
+  //we can add different data types into our list
+  //we have different methods to use with our list.e.g
+  planetList.add("Jupitar");
   for(String planet in planetList){
     print(planet);
   }
 
+  //  var names = ['tom','jerry','jane'];  //list - use square brackets 
+ 
   //nested for-loops and break and labels
   
   // myOuterLoop : for(int i=1;i<4;i++){ //where myOuterLoop is a label for the main for loop
@@ -123,15 +130,117 @@ void main(){
   //- all functions returns a value(if no return value specified then null is returned
   //-specidting retrun type is optional but is recommended as per code convention
   
-    int findArea(int length, int breadth){
-      int area = length *breadth;
-      return area;  //return is oprtional but is good coding practice
-      //if no return the null is defaulty returned
-    }
+    // int findArea(int length, int breadth){
+    //   int area = length *breadth;
+    //   return area;  //return is oprtional but is good coding practice
+    //   //if no return the null is defaulty returned
+    // }
+    //Dart supports arrow functions
+    int findArea(int length, int breadth) => length * breadth;
+    
+
     var k = findArea(10, 15);
-    print("The area of k is $k");
+    print("The area of k is $k"); 
   
 //SHORT HAND SYNTAX for Expressikons in Functions
 
+
+
+   //ENUMERATIONS; these are names/list of related items such that each value becomes an identity
+    //Enum
+    print(PersonProperties.values);  //prints out values in enum
+    const  jName = PersonProperties.lName ;
+    test2(jName);
+    const kName = PersonProperties.fName;
+    test2(kName);
+
     
+   //CLASSES - uses keyword 'class'
+
+//Classes in Dart 
+ Person Victor = Person("victor");
+ Victor.breath(); 
+
+ //NULL Safety '?' - used to check for null values 
+    List<String?>? scores = [null,"30",'40',"50",null];
+    //where ? before String denotes list can contain value with datatype of null 
+    //and ? after > denotes list socres can contain null value. i.e no value at all
+    //note objects that contain null values are said to  contain optional values
+
+    //we can cherry-pick non null values . uses '??'  to crosscheck over null values. note:its an infix operator. 
+    //receives the first non-null value or prints null if none
+    const String? firstName = null;
+    const String? middleName = 'jili';
+    const String? lastName = 'tom';
+
+    String? nonNullName = firstName ??middleName ?? lastName; 
+    print(nonNullName);//outputs jili due to jili being the first non null value
+
+    //we can use the Null-aware adingent operator to select a particular value for an something that is optional
+    nonNullName = firstName;
+    print(nonNullName); //outputs null
+    nonNullName??=lastName; //assins lastName to nonNullname if nonNullname is null
+    print(nonNullName);//outputs tom
+
+
+    //Conditional invocation; to find properties of nullable objects. uses '?.' keyword
+    var names = [null,'jerry','jane'];  //list
+
+    void test(List<String?>? names){
+      // if(names != null){ //old way of handling optional type error below
+      //   final numberOfNames = names.length; //gives error without if sttament above because string can receive null values
+      // }else{
+      //   final numberOfNames = 0;
+      // }
+      //final length = names?.length ?? 0 ; //i.e if names is has optional values then get length propertie;
+      print('the string $names has ${names?.length ?? 0} length');//where if names is null itself then length is set to zero
+      //e.g
+      names = null;
+      print('the string $names now has ${names?.length ?? 0} length');
+
+    }
+    test(names);
 }
+
+enum PersonProperties{ fName, lName, age}
+    //can use switch cases in enum 
+  void test2(PersonProperties p){
+  switch (p){
+            case PersonProperties.fName:
+              print('firstname');
+              break;
+            case PersonProperties.lName:
+              print('lastname');
+              break;
+            case PersonProperties.age:
+              print('age');
+              break;
+            default:
+              print(p);
+        }
+ }
+
+
+ class Person{ 
+  final String name;
+  Person(this.name); //constructor for string name above
+
+  
+  void run(){ //method of class
+    print('running');
+  }
+
+  void breath(){
+    print('breathing');
+  }
+  
+ }
+ //Inheritance; uses keyword extends
+ class Person1 extends Person{  //note every class always extends from Object class
+  Person1(super.name); //references superclasses variables
+  void getName(){
+    print(name);
+  }
+}
+//abstract classes can be instantaited using abstract keyword. (note: cant be instantiated)
+//Factory constructors can be used to when you dont necessarily want a constructor to create a new instances of a class
